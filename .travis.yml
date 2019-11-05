@@ -21,6 +21,7 @@ install:
   - pip install -U pip setuptools wheel
   - pip install tox-travis pytest-django-queries
   - git clone https://github.com/NyanKiyoshi/pytest-django-queries-ci-tools.git --depth 1 ../queries-ci-tools
+  - pip install coveralls
   - >
     if [ -n "$DJANGO" ]; then
       nvm install 10 \
@@ -65,3 +66,4 @@ addons:
 
 after_success:
   - ../queries-ci-tools/handle-event.sh
+  - coveralls
