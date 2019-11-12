@@ -108,8 +108,7 @@ def test_available_products_only_published(product_list):
 
 
 def test_available_products_only_available(product_list):
-    
-    product = product_list[0]
+      product = product_list[0]
     date_tomorrow = datetime.date.today() + datetime.timedelta(days=1)
     product.publication_date = date_tomorrow
     product.save()
