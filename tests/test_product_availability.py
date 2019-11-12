@@ -122,6 +122,7 @@ def test_published_product(product):
     product = Product.objects.get(name='Colored Parrot Cushion')
 
     status = get_product_availability_status(product)
+    print(status, ProductAvailabilityStatus.NOT_PUBLISHED)
 
     assert status == ProductAvailabilityStatus.NOT_PUBLISHED
     assert status == ProductAvailabilityStatus.READY_FOR_PURCHASE
