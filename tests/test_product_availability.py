@@ -2,8 +2,7 @@ import datetime
 from unittest.mock import Mock
 
 from prices import Money, TaxedMoney, TaxedMoneyRange
-# Added as Part of CPSC 542
-from saleor.product.models import Product
+
 from saleor.extensions.manager import ExtensionsManager
 from saleor.product import ProductAvailabilityStatus, VariantAvailabilityStatus, models
 from saleor.product.utils.availability import (
@@ -108,7 +107,6 @@ def test_available_products_only_published(product_list):
 
 
 def test_available_products_only_available(product_list):
-    
     product = product_list[0]
     date_tomorrow = datetime.date.today() + datetime.timedelta(days=1)
     product.publication_date = date_tomorrow
@@ -116,14 +114,3 @@ def test_available_products_only_available(product_list):
     available_products = models.Product.objects.published()
     assert available_products.count() == 1
     assert all([product.is_visible for product in available_products])
-
-# Added as part of CPSC 542
-def test_published_product(product):
-    
-    product = Product.objects.get(name='Colored Parrot Cushion')
-
-    status = get_product_availability_status(product)
-
-    assert status == ProductAvailabilityStatus.NOT_PUBLISHED
-    assert status == ProductAvailabilityStatus.READY_FOR_PURCHASE
-    
